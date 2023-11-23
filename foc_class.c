@@ -2,17 +2,17 @@
 #include <math.h>
 
 typedef struct {
-    int pole_pairs;
-    float rated_voltage;
-    float rated_current;
+    int pole_pairs;          // 极对数
+    float rated_voltage;     // 额定电压
+    float rated_current;     // 额定电流
 } MotorParameters;
 
 typedef struct {
-    float current_alpha;
-    float current_beta;
-    float current_d;
-    float current_q;
-    float rotor_angle;
+    float current_alpha;     // alpha电流分量
+    float current_beta;      // beta电流分量
+    float current_d;         // d轴电流
+    float current_q;         // q轴电流
+    float rotor_angle;       // 转子角度
 } FOCController;
 
 void update_currents(FOCController* controller, float alpha, float beta) {
@@ -45,22 +45,22 @@ void control_motor(FOCController* controller) {
 int main() {
     // 创建FOC控制器对象
     MotorParameters motor_parameters = {
-        .pole_pairs = 4,
-        .rated_voltage = 24.0,
-        .rated_current = 5.0
+        .pole_pairs = 4,             // 极对数
+        .rated_voltage = 24.0,       // 额定电压
+        .rated_current = 5.0         // 额定电流
     };
     FOCController foc_controller = {
-        .current_alpha = 0.0,
-        .current_beta = 0.0,
-        .current_d = 0.0,
-        .current_q = 0.0,
-        .rotor_angle = 0.0
+        .current_alpha = 0.0,        // alpha电流分量
+        .current_beta = 0.0,         // beta电流分量
+        .current_d = 0.0,            // d轴电流
+        .current_q = 0.0,            // q轴电流
+        .rotor_angle = 0.0           // 转子角度
     };
 
     // 更新电流和角度
-    float alpha = 1.0;
-    float beta = 2.0;
-    float angle = M_PI / 4;
+    float alpha = 1.0;               // alpha电流分量
+    float beta = 2.0;                // beta电流分量
+    float angle = M_PI / 4;          // 角度
     update_currents(&foc_controller, alpha, beta);
     update_rotor_angle(&foc_controller, angle);
 
